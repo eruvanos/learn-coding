@@ -1,0 +1,68 @@
+html, body, .full_height {
+    height: 100%;
+}
+
+/* Editor */
+#editor-page #actions {
+    height: 64px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#editor-page #editor {
+    height: 100%;
+}
+
+#editor-page #console, #console div {
+    height: 100%;
+}
+
+#editor-page #console-container {
+    padding-top: 10px;
+}
+
+#editor-page .pad-sides {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#editor-page #tutorial {
+    border: 1px solid black;
+    padding: 10px;
+    margin-left: 5px;
+}
+
+#editor-page .xheight {
+    height: calc(100% - 180px); /* magic value*/
+}
+
+#editor-page .h-80 {
+    height: 80%;
+}
+
+#editor-page .h-20 {
+    height: 20%;
+}
+
+#editor-page #tutorial {
+    overflow: scroll;
+}
+
+#editor-page .cut-row {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+/* markdown */
+#tutorial img {
+    width: 30%;
+}
+
+
+/* LED Strip */
+.f-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

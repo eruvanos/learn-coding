@@ -1,0 +1,23 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[packages]
+flask = "*"
+pytest = "*"
+boto3 = "*"
+mirakuru = "*"
+requests = "*"
+Flask-Markdown = "*"
+cfenv = "*"
+flask-cachebuster = "*"
+
+[dev-packages]
+pygments = "*"
+
+[requires]
+python_version = "3.8"
+
+[scripts]
+serve = "python run_local.py"

@@ -1,0 +1,93 @@
+<!doctype html>
+<html id="editor-page">
+
+<head>
+    <meta charset="utf-8">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/highlights.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/virtual-lightstrip.css') }}">
+
+    <script type="module">
+        import {VirtualLightstripTag} from "{{ url_for('static', filename='js/virtual-lightstrip.esm.js') }}"
+
+        const lightStrip = document.getElementsByTagName(VirtualLightstripTag)[0];
+        lightStrip.updateLength(16);
+        lightStrip.show();
+    </script>
+</head>
+<body onload="brython()">
+
+<!-- Navbar goes here -->
+<nav>
+    <div class="nav-wrapper teal lighten-1 center-align">
+        <a href="/" class="brand-logo">Learn Coding</a>
+    </div>
+</nav>
+
+<!-- Actions -->
+<div id="actions" class="pad-sides f-container">
+    <virtual-lightstrip></virtual-lightstrip>
+    <div>
+        <a id="run" class="waves-effect waves-light btn ">RUN</a>
+        <a id="save" class="waves-effect waves-light btn disabled">Save</a>
+    </div>
+</div>
+
+<!-- Page Layout here -->
+<div class="row xheight pad-sides">
+
+    <div class="col s6 full_height">
+        <div class="row h-80 cut-row">
+            <div id="editor" class=""></div>
+        </div>
+
+        <div id="console-container" class="row h-20">
+            <textarea id="console" class="col s12" autocomplete="off"></textarea>
+        </div>
+    </div>
+
+
+    <div class="col s6 full_height">
+        <div class="row full_height">
+            <div id="tutorial" class="full_height">
+                {{ tutorial_text |markdown }}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/ace/ace.js') }}"></script>
+
+<script>
+    window.TEAM = "{{ team_name }}";
+
+    // Speed up ace load time using plain JS
+    editor = ace.edit("editor");
+    editor.setReadOnly(true); // disable input until code is loaded
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/python");
+
+    M.toast({
+        'html': '<div class="preloader-wrapper small active" style="margin-right: 25px"><div class="spinner-layer spinner-green-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div> <span>Loading ...</span>',
+        'displayLength': 10000,
+        'outDuration': 2000,
+        'classes': 'loading_spinner'
+    })
+</script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/brython.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/brython_stdlib.js') }}"></script>
+
+<!-- Here is the magic -->
+<script type="text/python3" src="{{ url_for('static', filename='py/editor.py') }}"></script>
+
+</body>
+</html>

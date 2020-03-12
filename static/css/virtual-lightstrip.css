@@ -1,0 +1,18 @@
+virtual-lightstrip {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  padding: 5px;
+  width: fit-content; }
+  virtual-lightstrip .lightstrip-item {
+    width: 20px; }
+
+virtual-rgb-led {
+  background-color: currentColor;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border-color: white;
+  border-width: 1px;
+  border-style: dashed;
+  margin: 0 5px; }

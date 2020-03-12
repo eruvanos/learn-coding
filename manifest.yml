@@ -1,0 +1,15 @@
+applications:
+  - name: learn-coding
+    command: python app.py
+    instances: 1
+    memory: 256M
+    buildpacks:
+      - vws_proxy_buildpack
+      - python_buildpack_cached
+    routes:
+      - route: learn.sre.vwapps.io
+        # protected by service: learn-auth
+
+    services:
+      - learn-coding-db
+      - vws_proxy
