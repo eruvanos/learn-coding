@@ -86,7 +86,8 @@ Links:
 * [ ] Claim team name
     * [ ] Lock code
     * [ ] Unlock code (for private editing)
-* [x] Catch `[CMD] + S` to save code 
+* [x] Catch `[CMD] + S` to save code
+* [ ] Add control elements (button, switch)
 * [ ] Versioned
     * [ ] Save code versioned
     * [ ] Load code with latest version
@@ -95,9 +96,17 @@ Links:
 * [ ] Simulator 
     * [x] Add led simulator
     * [x] Connect API with simulator
-    * [ ] Implement len
+    * [x] Implement length
     
 * [x] Deployable to CF
 
 ## Bugs
 * [x] Alignment of editor and tutorial text box 
+
+
+
+## Tutorial
+1. Move the light using the arrow keys
+1. For `if` conditionals we need a `pixels.get(<index>)`
+2. For more fun we need a `getRandomColor()` method
+3. We need `pixels.length()`
