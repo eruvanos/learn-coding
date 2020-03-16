@@ -168,13 +168,6 @@ if __name__ == '__main__':
 **Missionen:**
 1. Erstelle eine endlos Schleife (`while True:`) und erstelle ein ständig blinkendes Licht
 
-# Move the light
-TBD: Move the light using the arrow keys
 
 
-
-
-# TODO:
-1. For `if` conditionals we need a `pixels.get(<index>)`
-2. For more fun we need a `getRandomColor()` method
-3. We need `pixels.length()`
+# Neue Aufgaben und Beipiele folgen demnächst
