@@ -54,11 +54,11 @@ print(ergebnis)
 Um ein LED Licht anzuschalten musst du die folgenden Befehle schreiben:
 
 ```python
-pixels.set(3, 'RED')
+pixels.setPixelColor(3, 'RED')
 pixels.show()
 ```
 
-Der erste Befehl `pixels.set(3, 'RED')` sagt dem Programm das die LED an position 4 (die Zählung fängt bei `0` an) die Farbe `RED` (also rot) haben soll. Dieser Befehl alleine reicht dem Computer aber noch nicht. Stattdessen musst du dem Computer noch sagen, dass er deine Änderung anzeigen soll. Dies machst du mit dem zweiten Befehl `pixels.show()`.
+Der erste Befehl `pixels.setPixelColor(3, 'RED')` sagt dem Programm das die LED an position 4 (die Zählung fängt bei `0` an) die Farbe `RED` (also rot) haben soll. Dieser Befehl alleine reicht dem Computer aber noch nicht. Stattdessen musst du dem Computer noch sagen, dass er deine Änderung anzeigen soll. Dies machst du mit dem zweiten Befehl `pixels.show()`.
 
 **Missionen:**
 1. Ändere die Farbe der LED (hier findest du eine Liste von verfügbaren Farbennamen: https://www.w3schools.com/colors/colors_names.asp)
@@ -71,7 +71,7 @@ Anstatt jede LED Lampe einzeln anzusteuern, kannst du auch eine Schleife verwend
 ```python
 position = 0
 while position < pixels.length(): # Solange position kleiner als 40 ist
-  pixels.set(position, 'RED')
+  pixels.setPixelColor(position, 'RED')
   position = position + 1
 pixels.show()
 ```
@@ -85,7 +85,7 @@ pixels.show()
 
 ```python
 for position in range(4):
-  pixels.set(position, "RED")
+  pixels.setPixelColor(position, "RED")
 pixels.show()
 ```
 
@@ -108,11 +108,11 @@ In diesem Beispiel ist `<Bedingung>` nur ein Platzhalter und kann für einen Ver
 
 
 ```python
-pixels.set(3, 'RED')
+pixels.setPixelColor(3, 'RED')
 position = 0
 while position < pixels.length():
   if get_color(position) == "RED":
-    pixels.set(position, 'BLACK')
+    pixels.setPixelColor(position, 'BLACK')
   position = position + 1
 pixels.show()
 ```
@@ -120,13 +120,13 @@ pixels.show()
 Zusätzlich zu dem Schlüsselwort `if` gibt es das Schlüsselwort `else` (deutsch: dann). Damit kannst du Operationen ausführen die alternativ ausgeführt werden sollen. Beispielsweise: Schalte LED aus wenn sie rot ist, ansonsten mache sie grün.
 
 ```python
-pixels.set(3, 'RED')
+pixels.setPixelColor(3, 'RED')
 position = 0
 while position < pixels.length():
   if get_color(position) == "RED":
-    pixels.set(position, 'BLACK')
+    pixels.setPixelColor(position, 'BLACK')
   else:
-    pixels.set(position, 'GREEN')
+    pixels.setPixelColor(position, 'GREEN')
   position = position + 1
 pixels.show()
 ```
@@ -151,13 +151,13 @@ Mit dieser Änderung kannst du nun LEDs zum blinken bringen:
 
 ```python
 async def main():
-  pixels.set(2, 'RED')
+  pixels.setPixelColor(2, 'RED')
   pixels.show()
   await sleep(1)
-  pixels.set(2, 'WHITE')
+  pixels.setPixelColor(2, 'WHITE')
   pixels.show()
   await sleep(1)
-  pixels.set(2, 'RED')
+  pixels.setPixelColor(2, 'RED')
   pixels.show()
   await sleep(1)
 
