@@ -89,9 +89,9 @@ Links:
 * [x] Catch `[CMD] + S` to save code
 * [ ] Add control elements (button, switch)
 * [ ] Versioned
-    * [ ] Save code versioned
-    * [ ] Load code with latest version
-    * [ ] Save timestamp with version
+    * [x] Save code versioned
+    * [x] Load code with latest version
+    * [x] Save timestamp with version
     * [ ] Show versions and load them
 * [ ] Simulator 
     * [x] Add led simulator

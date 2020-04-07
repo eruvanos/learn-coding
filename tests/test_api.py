@@ -1,6 +1,7 @@
 from uuid import uuid4
 
 import pytest
+from boto3.dynamodb.conditions import Key
 from flask import Response
 from flask.testing import FlaskClient
 
@@ -106,27 +107,52 @@ def test_save_code(client, dynamo_table):
     actual_team = dynamo_table.get_item(Key={'id': team_name, 'version': '1'}).get('Item')
     assert actual_team == {'id': team_name, 'version': '1', 'code': 'print("hello world")'}
 
-def test_update_code(client, dynamo_table):
-    # GIVEN
+
+def test_save_code_as_new_version(client, dynamo_table):
     team_name = str(uuid4())
     dynamo_table.put_item(
         Item={
             'id': team_name,
             'version': '1',
-            'code': 'old code'
         }
     )
 
-    # WHEN
     response: Response = client.post(f'/api/teams/{team_name}',
-                                    json={
-                                        'id': team_name,
-                                        'version': '1',
-                                        'code': 'print("hello world")'
-                                    })
+                                     json={
+                                         'id': team_name,
+                                         'code': 'print("hello world")'
+                                     })
 
-    # THEN
     assert response.status_code == 200, response.data.decode()
 
-    actual_team = dynamo_table.get_item(Key={'id': team_name, 'version': '1'}).get('Item')
-    assert actual_team == {'id': team_name, 'version': '1', 'code': 'print("hello world")'}
+    all_versions = dynamo_table.query(
+        KeyConditionExpression=Key('id').eq(team_name),
+        ScanIndexForward=False
+    ).get('Items', [])
+    assert len(all_versions) == 2
+
+    latest_version = all_versions[0]
+    assert latest_version['code'] == 'print("hello world")'
+
+
+def test_get_team_returns_newest_version(client, dynamo_table):
+    team_name = str(uuid4())
+    dynamo_table.put_item(
+        Item={
+            'id': team_name,
+            'version': '2020-04-07T12:00:00.000000'
+        }
+    )
+    dynamo_table.put_item(
+        Item={
+            'id': team_name,
+            'version': '2020-04-07T12:05:00.000000'
+        }
+    )
+
+    response: Response = client.get(f'/api/teams/{team_name}')
+
+    assert response.status_code == 200, response.data.decode()
+
+    assert response.json == {'id': team_name, 'version': '2020-04-07T12:05:00.000000'}
+

@@ -12,9 +12,9 @@ requests = "*"
 Flask-Markdown = "*"
 cfenv = "*"
 flask-cachebuster = "*"
+pygments = "*"
 
 [dev-packages]
-pygments = "*"
 
 [requires]
 python_version = "3.8"

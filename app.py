@@ -1,9 +1,10 @@
 # ServeR
 import logging
-import os
+from datetime import datetime
 
 import boto3
 import cfenv
+from boto3.dynamodb.conditions import Key
 from flask import Flask, jsonify, request, render_template, send_from_directory
 from flask_cachebuster import CacheBuster
 from flaskext.markdown import Markdown
@@ -59,12 +60,18 @@ def create_app(table: 'Table') -> Flask:
     @app.route('/api/teams/<team_name>')
     @log_error
     def get_team(team_name):
-        item = table.get_item(Key={'id': team_name, 'version': DEFAULT_VERSION}).get('Item')
-        if item is None:
-            return 'No team found.', 404
-        else:
-            return jsonify(item), 200
+        items = table.query(
+            KeyConditionExpression=Key('id').eq(team_name),
+            ScanIndexForward=False
+        ).get('Items', [])
 
+        if items:
+            item = items[0]
+            return jsonify(item), 200
+        else:
+            return 'No team found.', 404
+
+    # TODO Check if this is necessary
     @app.route('/api/teams', methods=['PUT'])
     @log_error
     def put_item():
@@ -80,7 +87,7 @@ def create_app(table: 'Table') -> Flask:
     def update_item(team_name):
         team = request.get_json(silent=True)
         team['id'] = team_name
-        team['version'] = DEFAULT_VERSION
+        team['version'] = datetime.utcnow().isoformat()
 
         # Update version instead
         table.put_item(
