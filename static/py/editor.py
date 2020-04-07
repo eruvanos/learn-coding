@@ -116,6 +116,7 @@ class LoadCodeFlow:
             editor.execCommand("gotolineend")
             editor.setReadOnly(False)
             doc['save'].classList.remove('disabled')
+            doc['versions'].classList.remove('disabled')
 
 
 class Pixels:
@@ -149,10 +150,18 @@ class Pixels:
             led.style.color = color
 
 
+def load_versions(*args):
+    pass
+
+
 if __name__ == '__main__':
     # Load program
     editor = window.ace.edit("editor")
     LoadCodeFlow(show_toast=False).start()
+
+    version_modal = M.Modal.init(doc['versions-modal'], {
+        'onOpenStart': load_versions
+    })
 
     # setup console
     cOut = cOutput()
@@ -198,3 +207,8 @@ if __name__ == '__main__':
     def save(*args):
         editor = window.ace.edit("editor")
         SaveCodeFlow(editor.getValue()).start()
+
+
+    @bind(doc['versions'], 'click')
+    def open_versions_modal(*args):
+        version_modal.open()

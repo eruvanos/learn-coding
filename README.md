@@ -92,7 +92,11 @@ Links:
     * [x] Save code versioned
     * [x] Load code with latest version
     * [x] Save timestamp with version
-    * [ ] Show versions and load them
+    * [x] Add button to open modal
+    * [ ] Show modal with title, table and close button
+    * [ ] Show versions in table (format timestamps for children)
+    * [ ] API list versions
+    * [ ] Load selected version
 * [ ] Simulator 
     * [x] Add led simulator
     * [x] Connect API with simulator
